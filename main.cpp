@@ -17,9 +17,21 @@ struct sphere{
 };
 // display sphere object
 void display_sphere_object(sphere &mySphere){
-    cout << "Position     : <" << mySphere.position.pos[0][0] << "," << mySphere.position.pos[0][1] << ">"  << endl;
-    cout << "Size_radius  : " << mySphere.Size_Radius << endl;
-    cout << "Motion_vector: <" << mySphere.motion.pos[0][0] << "," << mySphere.motion.pos[0][1] << ">" << endl;
+    cout << "Position     : <"
+         << mySphere.position.pos[0][0]
+         << ","
+         << mySphere.position.pos[0][1]
+         << ">"
+         << endl;
+    cout << "Size_radius  : "
+         << mySphere.Size_Radius
+         << endl;
+    cout << "Motion_vector: <"
+         << mySphere.motion.pos[0][0]
+         << ","
+         << mySphere.motion.pos[0][1]
+         << ">"
+         << endl;
     cout << endl;
 };
 //angle to direction vector
@@ -30,9 +42,8 @@ vector<vector<double>> angle_to_direction_vector(double degree){
     double x,y;
     x = sin(radians);
     y = cos(radians);
-    sphere s;
-    s.direction.pos = {{x,y}};
-    return s.position.pos;
+    vector<vector<double>> direction = {{x,y}};
+    return direction;
 };
 //point to point distance
 double point_to_point_distance(vec2 p1,vec2 p2){
@@ -44,7 +55,7 @@ double point_to_point_distance(vec2 p1,vec2 p2){
     return distance;
 };
 //dot production
-double dot_production(double vector1[], double vector2[]){
+double dot_product(double vector1[], double vector2[]){
     double product = 0;
     for (int i = 0; i < 2; i++)
     {
@@ -53,9 +64,14 @@ double dot_production(double vector1[], double vector2[]){
     return product;
 };
 //normalize vector
-vector<double> normalize_vector(vector<double> vec){
-    // TODO: Finish the function
-return vec;
+vec2 normalize_vector(vec2 vec){
+
+    double distance = vec.pos[0][0]/sqrt(pow(vec.pos[0][0],2)+ pow(vec.pos[0][1],2));
+    //double distance = point_to_point_distance(vecN[0],vecN[1]);
+    if(distance > 0){
+        // ensuring we do not divide by 0
+    }
+    return vec;
 };
 //reflect
 vector<double> reflect(vector<double> incident, vector<double> normal){
@@ -65,8 +81,7 @@ vector<double> reflect(vector<double> incident, vector<double> normal){
 };
 //check intersection
 bool check_intersection(sphere rolling_ball, sphere obstacle){
-    // TODO: Finish the function
-    return true;
+    return point_to_point_distance(rolling_ball.position, obstacle.position) < (rolling_ball.Size_Radius + obstacle.Size_Radius);
 };
 //display sphere
 void display_sphere(sphere &s){
@@ -74,12 +89,27 @@ void display_sphere(sphere &s){
 };
 int main()
 {
-    /** TESTING DISPLAY TO BE REMOVED*/
+    int max_steps = 100;
     sphere s;
     s.Size_Radius = 1.0;
-    s.position.pos = {{37.74331,58.654337}};
-    s.motion.pos = {{49.77406,27.544637}};
-    display_sphere_object(s);
-    display_sphere_object(s);
+    s.position.pos = {{-1.0,-2.5}};
+    s.direction.pos = angle_to_direction_vector(90.0);
+    s.motion.pos = {{-1.0,-2.5}};
+
+    sphere obstacle;
+    obstacle.position.pos = {{0.3,1.0}};
+    obstacle.Size_Radius = 1.0;
+
+    int user_steps = 0;
+    cout << "Enter number of steps: \n";
+    cin >> user_steps;
+    if(user_steps > 100 || user_steps < 0){
+        cout << "Please enter valid steps! \n";
+        return 0;
+    }
+    for(int i=0;i<user_steps;i++){
+        display_sphere_object(s);
+    }
+
     return 0;
 }
