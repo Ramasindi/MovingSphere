@@ -1,0 +1,83 @@
+struct sphere {
+
+   double posx, posy, posz,
+
+          radius,
+          Motion_vectorx, Motion_vectory;
+
+};
+ //vector <double> vec2 (2);
+
+
+void displaySphereInfo(int sphere_ID,sphere sphere_Object) {
+
+   cout << "Sphere " << sphere_ID << " : p=(" << sphere_Object.posx << ";" << sphere_Object.posy << ";" << sphere_Object.posz << ")"<<endl;
+    cout<< "r=" << sphere_Object.radius << endl;
+    cout << "Motion_vector: (" << sphere_Object.Motion_vectorx << ";" << sphere_Object.Motion_vectory << ")"<< endl;
+
+}
+
+//FUNCTION 2
+
+double angle_to_direction_vector(double RotationAngle)
+ {
+   double Pi=3.14159265359;
+   double rad= RotationAngle*Pi/180; //rotation angle in radians
+   double ans = cos(rad), sin(rad);
+   return ans ;
+}
+
+//FUNCTION 3
+double point_to_point_distance(double x1, double y1, double x2, double y2)
+{
+    //double d;
+   // double d = sqrt((y2-y1)^2 + (x2-x1)^2);
+   return sqrt(pow( x2 - x1, 2) + pow(y2-y1, 2));
+}
+
+//FUNCTION 4
+/*
+double dot_product(double dot)
+{
+    Dot = 
+}
+*/
+
+
+
+int main() {
+
+//FUNCTION 1
+
+   sphere sphere1={-37.9932,37.2407, 0, 1 , -2.1296, 1.99718};
+         // sphere2={3.34,5.5,1.25,3.1},
+          //sphere3={2.8,1.75,2.5,2.1};
+   displaySphereInfo(1,sphere1);
+  // displaySphereInfo(2,sphere2);
+   //displaySphereInfo(3,sphere3);
+cout<< endl;
+
+   //FUNCTION 2
+
+cout << "The rotation angle is: 90 degrees" << endl;
+cout <<"The angle to direction vector is: "<< angle_to_direction_vector(90)<<endl;
+cout<<endl;
+//not displaying a vector
+
+//FUNCTION 3
+
+cout << "p1=(1,2) and p2=(2,3)"<<endl;
+cout << "The distance between p1 and p2 is" << point_to_point_distance(1,2,3,4)<<endl;
+cout<< endl;
+/*
+cout << "p1=("<< x1<<";" << y1<< ")" <<endl;
+cout << "p2=("<< x2<<";" << y2<<")" << endl;
+*/
+
+
+
+
+
+
+return 0;
+}
